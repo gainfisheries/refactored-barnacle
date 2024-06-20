@@ -12,7 +12,7 @@ jobs:
         uses: actions/checkout@v2
         with:
           fetch-depth: 0
-      
+
       - name: Configure Git User
         run: |
           git config --global user.name "gainfisheries"
@@ -38,13 +38,13 @@ jobs:
           author_email: "gainfisheries@gmail.com"
           message: "Daily contribution"
           add: "README.md"
-      
+
       - name: Push changes
         uses: ad-m/github-push-action@master
         with:
           branch: daily-contribution
           github_token: ${{ secrets.gh }}
-      
+
       - name: Open pull request
         uses: peter-evans/create-pull-request@v3
         with:
@@ -54,7 +54,7 @@ jobs:
           base: main
           body: "This pull request was created automatically by a GitHub Actions workflow to make a daily contribution."
           token: ${{ secrets.gh }}
-      
+
       - name: Apply stashed changes (if any)
         if: always()
         run: |

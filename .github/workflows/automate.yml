@@ -3,6 +3,9 @@ name: workflow automation cron job
 on:
   schedule:
     - cron: '0 * * * *'
+  push:
+    branches:
+      - main
 
 jobs:
   make-contribution:

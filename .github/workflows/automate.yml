@@ -1,4 +1,4 @@
-name: workflow automation cron job.
+name: workflow automation cron job
 
 on:
   schedule:
@@ -17,12 +17,16 @@ jobs:
         run: |
           git config --global user.name "gainfisheries"
           git config --global user.email "gainfisheries@gmail.com"
-      
+
+      - name: Remove README.md
+        run: |
+          git rm -f README.md || true
+
       - name: Make daily contribution
         run: |
           echo "Making daily contribution"
           echo "$(date)" >> README.md
-      
+
       - name: Commit changes
         uses: EndBug/add-and-commit@v7
         with:

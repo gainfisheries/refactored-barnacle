@@ -18,6 +18,10 @@ jobs:
           git config --global user.name "gainfisheries"
           git config --global user.email "gainfisheries@gmail.com"
 
+      - name: Stash changes
+        run: |
+          git stash --include-untracked
+
       - name: Remove README.md
         run: |
           git rm -f README.md || true
@@ -50,3 +54,8 @@ jobs:
           base: main
           body: "This pull request was created automatically by a GitHub Actions workflow to make a daily contribution."
           token: ${{ secrets.gh }}
+      
+      - name: Apply stashed changes (if any)
+        if: always()
+        run: |
+          git stash pop || true
